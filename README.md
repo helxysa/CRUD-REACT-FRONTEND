@@ -6,7 +6,7 @@
 #### - React Bootstrap
 
 ### Dependencias
-#### - npm ou ayarn
+#### - npm ou yarn
 #### - nodejs
 
 ### Como iniciar projeto
