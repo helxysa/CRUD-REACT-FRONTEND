@@ -50,20 +50,20 @@ import { Button } from 'react-bootstrap';
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Descrição</th>
-              <th>Prioridade</th>
+              <th>Nome</th>
+              <th>Email</th>
               <th>Opções</th>
             </tr>
           </thead>
           <tbody>
             {this.state.alunos.map((aluno) => (
               <tr key={aluno.id}>
-                <td>{aluno.nome}</td>
+                <td>{aluno.name}</td>
                 <td>{aluno.email}</td>
                 <td>
                   <div>
-                    <Button variant="link" onClick={() => this.abrirModalAtualizar(aluno.id)}>Atualizar</Button>
-                    <Button variant="link" onClick={() => this.excluirAluno(aluno.id)}>Excluir</Button>
+                    <Button variant="">Atualizar</Button>
+                    <Button variant="danger" onClick={() => this.deletarAluno(aluno.id)}>Excluir</Button>
                   </div>
                 </td>
               </tr>
