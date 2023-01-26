@@ -1,74 +1,89 @@
-import React, {useState} from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React from 'react'
+import Table from 'react-bootstrap/Table';
+import { Button } from 'react-bootstrap';
 
-function Alunos(){ 
-  const cont = 0;
-  const [validated, setValidated] = useState(false)
-  const [id, setId] = useState(cont+1)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [course, setCourse] = useState('')
- 
+  /*
+    Como criar um construtor pra receber os dados da API
 
-  const Info = [
-    {
-      id:1,
-      name: 'João',
-      email: 'joao@mail.com',
-      course: 'Artes'
-    },
-    {
-      id:2,
-      name: 'marcos',
-      email: 'marcos@mail.com',
-      course: 'Direito'
-    }
-  ]
-  const [lists, setList] = useState(Info);
+    - Criando um construtor
   
+  */
 
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if(form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-       
-    }
-    setValidated(true);
-    name = event.target.elements.name.value;
+ class Alunos extends React.Component{
+
+  constructor(props){
+    super(props);  
     
+    this.state = {
+      alunos : []
+    }
+  }
 
+    componentDidMount(){
+      this.buscarAluno();
+    }
 
-    alert('Cadastro de Usuario Feito')
+    componentWillUnmount(){
+        
+    }
+
+    buscarAluno = () => {
+      fetch('http://localhost:3030/api/users/aluno').then(resposta => resposta.json()).then(dados => {
+        this.setState({ alunos: dados})
+      })
+    }
+
+    deletarAluno = (id) => {
+      fetch('http://localhost:3030/'+id, {
+        method: 'DELETE'
+      }).then(resposta => {
+        if(resposta.ok){
+          this.buscarAluno();
+        }
+      })
+    }
+
+  
+    renderTabela() {
+      return (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Prioridade</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.alunos.map((aluno) => (
+              <tr key={aluno.id}>
+                <td>{aluno.nome}</td>
+                <td>{aluno.email}</td>
+                <td>
+                  <div>
+                    <Button variant="link" onClick={() => this.abrirModalAtualizar(aluno.id)}>Atualizar</Button>
+                    <Button variant="link" onClick={() => this.excluirAluno(aluno.id)}>Excluir</Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      );
+    }
+  
+  
+ 
+    render() {
+      return (
+        <div>
+          <br />
+          {this.renderModal()}
+        </div>
+      );
+    }
   }
   
-  const Cadastrado = (event) => {
-   
-  }
 
-  return(
-    <div>
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label className='m-1'>Nome</Form.Label>
-          <Form.Control type='text' placeholder='Insira seu nome'
-          className='m-1' required></Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label className='m-1'>Email</Form.Label>
-          <Form.Control type='email' placeholder='Insira seu email' className='m-1' required></Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label className='m-1' >Curso</Form.Label>
-          <Form.Control type='text' placeholder='Insira seu curso' className='m-1' required></Form.Control>
-        </Form.Group>
-        <Button variant='primary' type='submit' className='m-1'
-       > Enviar
-        </Button>
-      </Form>
-    </div>
-  )
-}
-export default Alunos;
+ export default Alunos;
