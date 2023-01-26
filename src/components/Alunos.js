@@ -79,7 +79,7 @@ import { Button } from 'react-bootstrap';
       return (
         <div>
           <br />
-          {this.renderModal()}
+          {this.renderTabela()}
         </div>
       );
     }
