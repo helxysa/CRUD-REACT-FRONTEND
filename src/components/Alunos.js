@@ -2,11 +2,31 @@ import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function Alunos(){
+function Alunos(){ 
+  const cont = 0;
   const [validated, setValidated] = useState(false)
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [course, setCourse] = useState('');
+  const [id, setId] = useState(cont+1)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [course, setCourse] = useState('')
+ 
+
+  const Info = [
+    {
+      id:1,
+      name: 'João',
+      email: 'joao@mail.com',
+      course: 'Artes'
+    },
+    {
+      id:2,
+      name: 'marcos',
+      email: 'marcos@mail.com',
+      course: 'Direito'
+    }
+  ]
+  const [lists, setList] = useState(Info);
+  
 
 
   const handleSubmit = (event) => {
@@ -14,11 +34,19 @@ function Alunos(){
     if(form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      console.log(name)
+       
     }
     setValidated(true);
-  }
+    name = event.target.elements.name.value;
+    
 
+
+    alert('Cadastro de Usuario Feito')
+  }
+  
+  const Cadastrado = (event) => {
+   
+  }
 
   return(
     <div>
@@ -36,8 +64,8 @@ function Alunos(){
           <Form.Label className='m-1' >Curso</Form.Label>
           <Form.Control type='text' placeholder='Insira seu curso' className='m-1' required></Form.Control>
         </Form.Group>
-        <Button variant='primary' type='submit' className='m-1'>
-          Cadastrar
+        <Button variant='primary' type='submit' className='m-1'
+       > Enviar
         </Button>
       </Form>
     </div>
