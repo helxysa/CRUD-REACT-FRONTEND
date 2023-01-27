@@ -35,8 +35,8 @@ import { Modal } from 'react-bootstrap';
 
     //Get
     buscarAluno = () => {
-      fetch('http://localhost:3030/aluno').then(resposta => resposta.json()).then(aluno => {
-        this.setState({ alunos: aluno})
+      fetch('http://localhost:3030/aluno').then(resposta => resposta.json()).then(alunos => {
+        this.setState({ alunos: alunos})
       })
     }
 
@@ -67,11 +67,11 @@ import { Modal } from 'react-bootstrap';
     }
 
     // POST ALUNO
-    cadastraAluno = (aluno) => {
+    cadastraAluno = (alunos) => {
       fetch('http://localhost:3030/cadastro', {
         method: 'POST'
       , headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(aluno)
+        body: JSON.stringify(alunos)
     }
       ).then(resposta => {
         if(resposta.ok){
@@ -81,15 +81,16 @@ import { Modal } from 'react-bootstrap';
     }
 
     //PUT
-    atualizarAluno = (aluno) => {
-      fetch('http://localhost:3030/atualizar'+aluno.id, {
+    atualizarAluno = (alunos) => {
+      fetch('http://localhost:3030/atualizar'+alunos.id, {
         method: 'PUT'
       , headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(aluno)
+        body: JSON.stringify(alunos)
     }
       ).then(resposta => {
         if(resposta.ok){
           this.buscarAluno();
+          
         } else{
           alert(JSON.stringify(resposta))
         }
@@ -128,20 +129,20 @@ import { Modal } from 'react-bootstrap';
     // SUBMIT PRO POST
     submit = () => {
       if(this.state.id === 0){
-        const aluno = {
+        const alunos = {
           name: this.state.name,
           email: this.state.email,
           course: this.state.course,
         }
-        this.cadastraAluno(aluno)
+        this.cadastraAluno(alunos)
       
       } else {
-        const aluno = {
+        const alunos = {
           id: this.state.id,
           email: this.state.email,
           course: this.state.course,
         }
-        this.atualizarAluno(aluno)
+        this.atualizarAluno(alunos)
       }
     }
     
@@ -152,7 +153,6 @@ import { Modal } from 'react-bootstrap';
 
     renderModal(){
       return(
-        <Modal>
         <Form>
         <Form.Group className="m-3" >
           <Form.Label>ID</Form.Label>
@@ -174,9 +174,9 @@ import { Modal } from 'react-bootstrap';
           Salvar
         </Button>
       </Form>
-      </Modal>
+      
       )  
-    }
+    };
 
     renderFormulario(){
       return(
@@ -207,6 +207,7 @@ import { Modal } from 'react-bootstrap';
         <Table striped bordered hover className='m-3'>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Nome</th>
               <th>Email</th>
               <th>Curso</th>
@@ -216,6 +217,7 @@ import { Modal } from 'react-bootstrap';
           <tbody>
             {this.state.alunos.map((aluno) => (
               <tr key={aluno.id}>
+                <td>{aluno.id}</td>
                 <td>{aluno.name}</td>
                 <td>{aluno.email}</td>
                 <td>{aluno.course}</td>
