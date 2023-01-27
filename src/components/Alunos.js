@@ -135,17 +135,28 @@ import { Modal } from 'react-bootstrap';
           course: this.state.course,
         }
         this.cadastraAluno(alunos)
-      
-      } else {
-        const alunos = {
-          id: this.state.id,
-          email: this.state.email,
-          course: this.state.course,
-        }
-        this.atualizarAluno(alunos)
       }
     }
+    //   } else {
+    //     const alunos = {
+    //       id: this.state.id,
+    //       email: this.state.email,
+    //       course: this.state.course,
+    //     }
+    //     this.atualizarAluno(alunos)
+    //   }
+    // }
     
+    submitAtualiza = () => {
+      const alunos = {
+        id: this.state.id,
+        email: this.state.email,
+        course: this.state.course,
+      }
+      this.atualizarAluno(alunos)
+
+
+    }
 
     
 
@@ -170,7 +181,7 @@ import { Modal } from 'react-bootstrap';
           <Form.Label>Curso</Form.Label>
           <Form.Control type="text" placeholder="Insira seu curso" value={this.state.course}  onChange={this.atualizaCurso} />
         </Form.Group>
-        <Button variant="primary" type="submit" className='m-3' onClick={this.submit} >
+        <Button variant="primary" type="submit" className='m-3' onClick={this.submitAtualiza} >
           Salvar
         </Button>
       </Form>
