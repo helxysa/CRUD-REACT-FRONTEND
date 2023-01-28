@@ -137,15 +137,7 @@ import { Modal } from 'react-bootstrap';
         this.cadastraAluno(alunos)
       }
     }
-    //   } else {
-    //     const alunos = {
-    //       id: this.state.id,
-    //       email: this.state.email,
-    //       course: this.state.course,
-    //     }
-    //     this.atualizarAluno(alunos)
-    //   }
-    // }
+  
     
     submitAtualiza = () => {
       const alunos = {
@@ -162,32 +154,32 @@ import { Modal } from 'react-bootstrap';
 
     // RENDERS
 
-    renderModal(){
-      return(
-        <Form>
-        <Form.Group className="m-3" >
-          <Form.Label>ID</Form.Label>
-          <Form.Control  value={this.state.id} readOnly={true}/>
-        </Form.Group>
-        <Form.Group className="m-3" >
-          <Form.Label>Nome</Form.Label>
-          <Form.Control  value={this.state.name} readOnly={true}/>
-        </Form.Group>
-        <Form.Group className="m-3" >
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Insira seu email" value={this.state.email} onChange={this.atualizaEmail} />
-        </Form.Group>
-        <Form.Group className="m-3" >
-          <Form.Label>Curso</Form.Label>
-          <Form.Control type="text" placeholder="Insira seu curso" value={this.state.course}  onChange={this.atualizaCurso} />
-        </Form.Group>
-        <Button variant="primary" type="submit" className='m-3' onClick={this.submitAtualiza} >
-          Salvar
-        </Button>
-      </Form>
+    // renderModal(){
+    //   return(
+    //     <Form>
+    //     <Form.Group className="m-3" >
+    //       <Form.Label>ID</Form.Label>
+    //       <Form.Control  value={this.state.id} readOnly={true}/>
+    //     </Form.Group>
+    //     <Form.Group className="m-3" >
+    //       <Form.Label>Nome</Form.Label>
+    //       <Form.Control  value={this.state.name} readOnly={true}/>
+    //     </Form.Group>
+    //     <Form.Group className="m-3" >
+    //       <Form.Label>Email</Form.Label>
+    //       <Form.Control type="email" placeholder="Insira seu email" value={this.state.email} onChange={this.atualizaEmail} />
+    //     </Form.Group>
+    //     <Form.Group className="m-3" >
+    //       <Form.Label>Curso</Form.Label>
+    //       <Form.Control type="text" placeholder="Insira seu curso" value={this.state.course}  onChange={this.atualizaCurso} />
+    //     </Form.Group>
+    //     <Button variant="primary" type="submit" className='m-3' onClick={this.submitAtualiza} >
+    //       Salvar
+    //     </Button>
+    //   </Form>
       
-      )  
-    };
+    //   )  
+    // };
 
     renderFormulario(){
       return(
@@ -253,7 +245,7 @@ import { Modal } from 'react-bootstrap';
       return (
         <div>
           <br />
-          {this.renderModal()}
+          {/* {this.renderModal()} */}
           {this.renderFormulario()}
           {this.renderTabela()}
         </div>
